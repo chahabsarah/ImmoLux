@@ -1,0 +1,32 @@
+<div class="verify-email-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-lg-12 mx-auto">
+        <div class="verify-email-wrap">
+          <div class="verify-email-header">
+            <h3>Verify Your Email</h3>
+            <p>Enter the verification code sent to your email to activate your account.</p>
+          </div>
+          <form (ngSubmit)="onVerify()" #verifyForm="ngForm">
+            <div class="form-group">
+              <label for="token">Verification Code</label>
+              <input
+                type="text"
+                id="token"
+                class="form-control"
+                placeholder="Enter your code"
+                [(ngModel)]="token"
+                name="token"
+                required
+              />
+            </div>
+            <button class="btn btn-primary w-100" type="submit" [disabled]="isLoading">Verify</button>
+          </form>
+          <div class="verification-message text-center mt-3" *ngIf="message">
+            <p>{{ message }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+/* Table Styles */
+.table {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  background-color: #fff;
+}
+
+.table thead th {
+  background-color: #343a40;
+  color: white;
+  text-align: left;
+  padding: 0.75rem;
+  font-weight: 600;
+}
+
+.table tbody tr {
+  transition: background-color 0.3s ease-in-out;
+}
+
+.table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.table td {
+  padding: 0.75rem;
+  vertical-align: middle;
+}
+
+.table tbody .actions {
+  display: flex;
+  gap: 0.5rem; /* Space between buttons */
+}
+
+.table tbody .actions button {
+  flex: 1;
+  min-width: 80px; /* Ensures button width for better spacing */
+}
+
+/* Responsive Table */
+@media (max-width: 767px) {
+  .table thead {
+    display: none;
+  }
+
+  .table, .table tbody, .table tr, .table td {
+    display: block;
+    width: 100%;
+  }
+
+  .table td {
+    position: relative;
+    padding-left: 50%;
+    text-align: right;
+    border: 1px solid #dee2e6;
+    box-sizing: border-box;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 10px;
+    font-weight: bold;
+    background-color: #f1f1f1;
+  }
+}
+
+/* Modern Hover Effect */
+.animated-row {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.animated-row:hover {
+  background-color: #e9ecef;
+  transform: translateY(-2px);
+}

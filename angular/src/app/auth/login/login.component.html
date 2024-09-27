@@ -1,0 +1,36 @@
+<div class="login-content" style="margin-top: 50px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-lg-5 mx-auto">
+        <div class="login-wrap">
+          <div class="login-header">
+            <h3>Welcome Back</h3>
+          </div>
+          <!-- Display error message -->
+          <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+          </div>
+          <form (ngSubmit)="onLogin()">
+            <div class="form-group group-img">
+              <div class="group-img">
+                <i class="feather-mail"></i>
+                <input type="email" class="form-control" placeholder="Email Address" [(ngModel)]="loginRequest.email" name="email" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="pass-group group-img">
+                <i class="feather-lock"></i>
+                <input type="password" class="form-control pass-input" placeholder="Password" [(ngModel)]="loginRequest.password" name="password" required />
+                <span [ngClass]="Toggledata == true ? 'toggle-password feather-eye' : 'toggle-password feather-eye-off'" (click)="iconLogle()"></span>
+              </div>
+            </div>
+            <button class="btn btn-primary w-100 login-btn" type="submit">Sign in</button>
+            <div class="register-link text-center">
+              <p>No account yet? <a class="forgot-link" [routerLink]="routes.signup">Signup</a></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

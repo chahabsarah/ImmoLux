@@ -1,0 +1,29 @@
+<div class="add-local-content" style="margin-top:120px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-lg-6 mx-auto">
+        <div class="add-local-wrap">
+          <h3>Update Listing</h3>
+          <form (ngSubmit)="updateLocal()">
+            <input type="text" [(ngModel)]="local.localType" name="localType" placeholder="Local Type : S0 , S+1, S+2, etc" required>
+            <div style="display: flex;justify-content:space-between">
+            <input type="number" [(ngModel)]="local.rent" name="rent" placeholder="Rent" [disabled]="!!local.sell" required>
+            <input type="number" [(ngModel)]="local.bookingPrice" name="bookingPrice" placeholder="Booking Price" required>
+            <input type="number" [(ngModel)]="local.sell" name="sell" placeholder="Sell" [disabled]="!!local.rent" required>
+          </div>
+            <input type="text" [(ngModel)]="local.localDescription" name="localDescription" placeholder="Description" required>
+            <input type="text" [(ngModel)]="local.location" name="location" placeholder="location" required>
+            <input type="text" [(ngModel)]="local.amenities" name="amenities" placeholder="Amenities" required>
+            <input type="text" [(ngModel)]="local.details" name="details" placeholder="Area" required>
+
+            <div *ngIf="rentSellError" class="error-message">
+              You can only fill either the Rent or the Sell field, not both.
+            </div>
+
+            <button type="submit" [disabled]="rentSellError">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

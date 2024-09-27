@@ -1,0 +1,33 @@
+.dashboard-content
+{
+margin-top: 80px;
+}
+.card {
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.carousel-item img {
+  object-fit: cover;
+}
+
+.amount .badge {
+  margin-right: 0.5rem;
+}
+span
+{
+  text-decoration: none!important;
+}
+#f1,#f2{
+  font-size: 15px;
+
+}
+#f3{
+  color: black;
+  font-size: 12px;
+
+}

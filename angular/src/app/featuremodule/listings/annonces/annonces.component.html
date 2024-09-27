@@ -1,0 +1,98 @@
+<!-- Bookmark Content -->
+
+<div class="dashboard-content">
+
+  <div class="d-flex flex-column align-items-center my-4">
+    <div class="input-group mb-4" style="max-width: 500px; margin: 30px auto 50px;">
+      <input class="form-control shadow-sm rounded-pill" type="text" [(ngModel)]="local" placeholder="Search" aria-label="Search">
+      <span class="input-group-text bg-primary text-white rounded-pill ms-2">
+        <i class="fas fa-search"></i>
+      </span>
+    </div>
+
+    <label for="priceRange" class="form-label fw-bold">Select a Price Range</label>
+    <input
+      type="range"
+      id="priceRange"
+      name="priceRange"
+      class="form-range w-75"
+      min="80"
+      max="7000"
+      [(ngModel)]="maxRent"
+      (input)="filterByPriceRange()"
+      style="accent-color: #007bff;"
+    >
+
+    <div class="d-flex justify-content-between w-75 mt-2">
+      <span class="badge bg-secondary">Minimum Price: 80 DT</span>
+      <span class="badge bg-primary"> Maximum Price: {{ maxRent }} DT</span>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="bookmarks-content grid-view featured-slider">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let local of filteredLocals | filter:local">
+          <div class="card border-0 shadow-sm rounded overflow-hidden">
+            <!-- Carousel -->
+            <div id="carouselExampleControls{{local.localID}}" class="carousel slide">
+              <div class="carousel-inner">
+                <div class="carousel-item" *ngFor="let imageUrl of local.imageUrls; let i = index" [ngClass]="{'active': i === 0 }">
+                  <img [src]="imageUrl" class="d-block w-100" alt="local Image" style="height: 300px; object-fit: cover;">
+                  <div class="read-more-overlay">
+                  </div>
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleControls{{local.localID}}" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleControls{{local.localID}}" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+
+            <div class="card-body p-4">
+              <h5 class="card-title mb-3" style="display: flex;justify-content:space-between">
+                <a class="text-dark text-decoration-none">{{ local.localType }}</a>
+                <div>
+                  <button *ngIf="userRole === 'ADMIN'" class="btn btn-outline-secondary ms-2" (click)="goToUpdate(local.localID)">Update</button>
+                  <button *ngIf="userRole === 'ADMIN'" class="btn btn-outline-danger ms-2" (click)="deleteLocal(local.localID)">Delete</button>
+
+                  <button class="btn btn-outline-success ms-2" (click)="Details(local.localID)">Details</button>
+                        </div>
+
+              </h5>
+              <p class="card-text mb-3">
+                <strong style="color: darkred;">{{ local.location }}</strong>
+              </p>
+              <p class="mb-2"><strong>Amenities:</strong> {{ local.amenities }}</p>
+              <p class="mb-2"><strong>Area:</strong> {{ local.details }}</p>
+              <p class="mb-3"><strong>Posted at :</strong> {{ local.visitDate }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="amount-details">
+                  <div class="amount">
+                    <span *ngIf="local.rent > 0" class="badge bg-primary">Rent: {{ local.rent }} DT</span>
+                    <span *ngIf="local.sell > 0" class="badge bg-success">Sell: {{ local.sell }} DT</span>
+                    <span class="badge bg-warning">REF: {{ local.bookingPrice }}</span>
+                  </div>
+                </div>
+                <div class="ratings">
+                  <div class="d-flex align-items-center">
+                    <button class="btn btn-outline-primary"
+                    (click)="likedLocals.has(local.localID) ? removeLike(local.localID) : addLike(local.localID)">
+              <i class="fas fa-heart" [ngClass]="{'text-danger': likedLocals.has(local.localID)}"></i>
+              {{ likedLocals.has(local.localID) ? 'Unlike' : 'Like' }}
+            </button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
